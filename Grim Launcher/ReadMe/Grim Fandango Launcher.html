@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Grim Fandango Launcher ReadMe</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<style type="text/css">
+	<!--
+	.style7 {font-family: Verdana, Arial, Helvetica, sans-serif}
+	.style10 {font-size: large}
+	.style12 {font-size: small}
+	-->
+	</style>
+</head>
+
+<body>
+	<span class="style7">
+		<span class="style10">
+			Grim Fandango Launcher<br>
+			By Bgbennyboy<br>
+			Version 1.5<br>
+			<a href="http://quick.mixnmojo.com">Http://quick.mixnmojo.com</a><br><br>
+		</span>
+	</span>
+	
+	<p class="style7"><strong><em>New in this version:</em></strong></p>
+	<ul>
+		<li class="style7">Vista compatibility:<br>
+		The launcher now automatically prompts to run as administrator when its started.<br><br>
+		The program icon now includes all sizes up to 256x256.<br><br>
+		If running on Vista the launcher now uses vista fonts.</li><br>
+		<li class="style7">Fixed a small memory leak.</li><br>
+		<li class="style7">Now uses windows temp folder rather than Grim folder for extracted resources like the readme and patch.</li><br>
+		<li class="style7">Cosmetic changes:<br>
+		Interface redesigned, text and icons made clearer, changed the launcher images. </li><br>
+		<li class="style7">New launcher icon:<br>
+		Now uses the excellent Grim Fandango icon created by <a href="http://thanius.com/pixmaps/scummvm/">Thanius</a>. </li><br>
+		<li class="style7">64 bit versions of Windows:<br>
+		Now officially supported. The launcher has been tested on XP64 and Vista64.</li><br>
+		<li class="style7">Old versions of Windows no longer officially supported:<br>
+		Versions before  XP (95/98/ME/2000) should be fine but the launcher hasnt been tested with them.</li><br>
+	</ul>
+
+	
+	<p class="style7"><strong><em>What is Grim Fandango Launcher ?:</em></strong><br>
+	  A replacement launcher program for Grim Fandango.<br> 
+	  It has features not present in the original launcher:</p>
+	<ul>
+		<li class="style7">Can run Grim Fandango in windowed mode.</li><br>
+	    <li class="style7">Can make Grim Fandango run from hard drive (play without the cd's) and can automatically copy the required files to the hard drive.</li><br>
+	    <li class="style7">Supports all recent versions of Windows (XP, XP64, XP MCE, Vista, Vista64). Windows 98, ME and 2000 are not officially supported but should work correctly.</li><br>
+	    <li class="style7">Automatically enables Grim Fandango's developer/debug mode. See the section below for more information on this.</li><br>
+	    <li class="style7">Loads one of 7 random images as the main launcher image - for added eye candy. </li><br>
+	</ul>
+
+	<p class="style7">The program does not need to be installed and can be run from anywhere since it reads the registry values in order to find the location of Grim Fandango. Consequentally, Grim Fandango must be installed for the launcher to work correctly.</p>
+
+
+	<br>
+	<p class="style7">
+		<em><strong>How to use it:</strong></em>
+		<br>
+		Usage should be fairly self-explanatory:
+	</p>
+	<ul>
+		<li class="style7">Click either <i><u>Play fullscreen</u></i> or <i><u>Play windowed</u></i> to start the game.</li><br>
+		<li class="style7">Click <i><u>Debug Keys</u></i> to bring up a window that displays the debug keys and their functions.<br>
+			These were all found/documented by Serge (Jimmi Thøgersen) with minor additions by me. You do not have to close this window to carry on using the launcher, just move it or minimise it, that way you can refer to it if you want to try the debug keys in windowed mode.</li><br>
+		<li class="style7">Click 'Resume last saved game' to enable/disable the option.<br>
+			If enabled Grim will automatically load the last saved game when you click one of the play buttons.</li><br>
+		<li class="style7">The <i><u>Lucasarts readme</u></i> button displays Lucasarts' CMI readme, while the <i><u>Launcher readme</u></i> button displays this readme.</li><br>
+		<li class="style7">The status bar at the bottom of the launcher shows whether the game will be run from cd or hard drive.</li><br>
+	</ul>
+	
+	<p class="style7">Click <i><u>Options</u></i> to bring up the options menu.</p>
+	<ul>
+		<li class="style7"><i><u>Close launcher on play:</u></i><br>
+		If enabled, then the launcher closes when one of the play buttons is clicked.</li><br>
+		<li class="style7"><i><u>Run Grim from hard drive:</u></i><br>
+		This governs whether the game is run from hard drive or cd. Click the button to switch between the two options.<br>
+		If enabled, the launcher will first check that you have the required files on your hard drive, if not, then it prompts you to insert your Grim Fandango cd's and copies the files to hard drive for you (this requires  1.2 GB of disk space).</li><br>
+	</ul>
+
+	<br>
+	<p class="style7">
+		<em><strong>Developer Mode/Debug Keys:</strong></em>
+		<br>	
+		The Grim Fandango Developer Mode was found and documented by Serge (Jimmi Thøgersen). His list of debug keys are included in this launcher with his permission.<br><br>
+		Developer mode allows the game to be run in a window. This can be done in two ways: by clicking 'Play windowed' in the launcher, or by loading the game, going to options > 3D hardware options and choosing 'DIBSection Windowed Display'.<br><br>
+		Developer mode also enables the use of debug keys. The list of debug keys and their functions can be seen by pressing the 'Debug Keys' button in the launcher.<br><br>
+		Developer mode is automatically activated by the launcher and even if you then play the game without the launcher, developer mode will still be enabled. I have not provided an option to disable developer mode because this disables some features (windowed mode) and 
+			complicates the operation of the launcher. If you do want to disable developer mode though, you can do this by editing the registry. Navigate to in HKEY_LOCAL_MACHINE/Software/LucasArts Entertainment Company LLC/Grim Fandango/v1.0/ and delete the "good_times_ key.<br>		
+	</p>	
+	
+	
+	<br>
+	<p class="style7">
+		<em><strong>Bugs/Limitations:</strong></em>
+		<br>
+		Windowed mode may not work on some systems. To fix this you can try activating windowed mode in a different way: In the game, go to Options > 3D Hardware Setup and choose "DIBSection Windowed Display".
+	</p>
+	
+	<br>
+	<p class="style7"><em><strong>Credits and thanks to:</strong></em>
+		<br>
+		Jimmi Thøgersen (Serge`) for all the information about the hidden features of Grim Fandango and debug mode in his 'Inside the Engine' article.
+		<br><br>
+		Launcher icon uses the Grim Fandango icon created by <a href="http://thanius.com/pixmaps/scummvm/">Thanius</a>.
+		<br><br>
+		Readme, tick, cross and update icons from the Buff set by <a href="http://mattahan.deviantart.com/">Mahttahan.</a>
+	</p>
+	
+	<br>
+	<p class="style7"><em><strong>Support:</strong></em>
+		<br>
+		<a href="http://quick.mixnmojo.com/contact">Contact me</a>.
+		<br><br>
+		All my software is completely free. If you find this program useful please consider making a donation. This can be done on my website.
+	</p>
+	
+	<br>
+	<p class="style7 style12">bgbennyboy 09/10/07 </p>
+</body>
+</html>
