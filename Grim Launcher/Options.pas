@@ -1,24 +1,14 @@
 {
 ******************************************************
   Grim Fandango Launcher
-  Copyright (c) 2004-2008 Bgbennyboy
-  Http://quick.mixnmojo.com
+  2004-2014 By Bennyboy
+  Http://quickandeasysoftware.net
 ******************************************************
 }
 {
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 }
 
 unit Options;
@@ -26,8 +16,7 @@ unit Options;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Forms, ImgList, Controls, Dialogs,
-  PngImageList,
+  Windows, Messages, SysUtils, Classes, Forms, Controls, Dialogs, UITypes,
   JvBaseDlg, JvSHFileOperation, AdvGlowButton,
   JCLRegistry, JCLFileUtils,
   uGrimUtils, uGrimConst;
@@ -37,7 +26,6 @@ type
     JvSHFileOperation1: TJvSHFileOperation;
     btnCloseOnRun: TAdvGlowButton;
     btnHdRun: TAdvGlowButton;
-    PngImageList1: TPngImageList;
     procedure FormShow(Sender: TObject);
     procedure btnCloseOnRunClick(Sender: TObject);
     procedure btnHdRunClick(Sender: TObject);
@@ -61,23 +49,23 @@ procedure TfrmOptions.FormShow(Sender: TObject);
 begin
   if GetCloseOnRun then
   begin
-    btnCloseOnRun.ImageIndex:=1;
+    btnCloseOnRun.Picture.LoadFromResourceName(HInstance, 'CloseOnPlayTick');
     btnCloseOnRun.Tag:=1;
   end
   else
   begin
-    btnCloseOnRun.ImageIndex:=0;
+    btnCloseOnRun.Picture.LoadFromResourceName(HInstance, 'CloseOnPlayCross');
     btnCloseOnRun.Tag:=0;
   end;
 
   if GetHDRun then
   begin
-    btnHdRun.ImageIndex:=3;
+    btnHdRun.Picture.LoadFromResourceName(HInstance, 'RunFromHdTick');
     btnHdRun.Tag:=1
   end
   else
   begin
-    btnHdRun.ImageIndex:=2;
+    btnHdRun.Picture.LoadFromResourceName(HInstance, 'RunFromHdCross');
     btnHdRun.Tag:=0;
   end;
 
@@ -189,14 +177,14 @@ procedure TfrmOptions.btnCloseOnRunClick(Sender: TObject);
 begin
   if btnCloseOnRun.Tag=1 then
   begin
-    btnCloseOnRun.ImageIndex:=0;
+    btnCloseOnRun.Picture.LoadFromResourceName(HInstance, 'CloseOnPlayCross');
     btnCloseOnRun.Tag:=0;
     RegWriteInteger(HKEY_CURRENT_USER, 'Software\Quick And Easy\Grim Launcher', 'closeonrun', 0);
   end
   else
   if btnCloseOnRun.Tag=0 then
   begin
-    btnCloseOnRun.ImageIndex:=1;
+    btnCloseOnRun.Picture.LoadFromResourceName(HInstance, 'CloseOnPlayTick');
     btnCloseOnRun.Tag:=1;
     RegWriteInteger(HKEY_CURRENT_USER, 'Software\Quick And Easy\Grim Launcher', 'closeonrun', 1);
   end
@@ -209,18 +197,18 @@ begin
   begin
     if GetAllFilesOnHD=false then
     begin
-      ShowMessage(strCopyFilesMsg);
+      MessageDlg(strCopyFilesMsg, mtInformation, [mbOk], 0);
       CopyFiles;
       if GetAllFilesOnHD=true then
       begin
-        btnHdRun.ImageIndex:=3;
+        btnHdRun.Picture.LoadFromResourceName(HInstance, 'RunFromHdTick');
         btnHdRun.Tag:=1;
         RegWriteInteger(HKEY_CURRENT_USER, 'Software\Quick And Easy\Grim Launcher', 'hdrun', 1);
       end;
     end
     else
     begin
-      btnHdRun.ImageIndex:=3;
+      btnHdRun.Picture.LoadFromResourceName(HInstance, 'RunFromHdTick');
       btnHdRun.Tag:=1;
       RegWriteInteger(HKEY_CURRENT_USER, 'Software\Quick And Easy\Grim Launcher', 'hdrun', 1);
     end;
@@ -228,7 +216,7 @@ begin
   else
   if btnHdRun.Tag=1 then
   begin
-    btnHdRun.ImageIndex:=2;
+    btnHdRun.Picture.LoadFromResourceName(HInstance, 'RunFromHdCross');
     btnHdRun.Tag:=0;
     RegWriteInteger(HKEY_CURRENT_USER, 'Software\Quick And Easy\Grim Launcher', 'hdrun', 0);
   end;

@@ -1,29 +1,14 @@
 {
 ******************************************************
   Grim Fandango Launcher
-  Copyright (c) 2004-2008 Bgbennyboy
-  Http://quick.mixnmojo.com
+  2004-2014 By Bennyboy
+  Http://quickandeasysoftware.net
 ******************************************************
 }
 {
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-}
-
-{
-  Size of image should always be slightly larger than size of form so that
-  the scrollbox is activated. Autosize makes this happen.
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 }
 
 unit Debugfrm;
@@ -32,13 +17,12 @@ interface
 
 uses
   Windows, Messages, Controls, Classes, Forms, ExtCtrls,
-  mswheel, PngImageList;
+  mswheel, pngimage;
 
 type
   TfrmDebug = class(TForm)
     ScrollBox1: TScrollBox;
     MSWheel1: TMSWheel;
-    PngImageCollectionDebugKeys: TPngImageCollection;
     Image1: TImage;
     procedure MSWheel1WheelEvent(zdelta, xpos, ypos, ScrollLines: Integer);
     procedure FormCreate(Sender: TObject);
@@ -56,8 +40,17 @@ implementation
 {$R *.dfm}
 
 procedure TfrmDebug.FormCreate(Sender: TObject);
+var
+  Png: TPngImage;
 begin
-  Image1.Picture.Bitmap.Assign(PngImageCollectionDebugKeys.Items[0].PngImage);
+  Png := TPngImage.Create;
+  try
+    Png.LoadFromResourceName(HInstance, 'DebugKeys');
+    Image1.Picture.Graphic := Png;
+  finally
+    Png.Free;
+  end;
+
 end;
 
 procedure TfrmDebug.MSWheel1WheelEvent(zdelta, xpos, ypos,

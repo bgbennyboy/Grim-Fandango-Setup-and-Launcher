@@ -1,38 +1,20 @@
 {
 ******************************************************
   Grim Fandango Launcher
-  Copyright (c) 2004-2008 Bgbennyboy
-  Http://quick.mixnmojo.com
+  2004-2014 By Bennyboy
+  Http://quickandeasysoftware.net
 ******************************************************
 }
 {
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 }
-
 {
 BEFORE RELEASE:
-    DISABLE ReportMemoryLeaksOnShutdown in project .dpr
     Change build configuration from debug to release
     Update readme
-    Replace readme in MainResources with new one
-    Compress with UPX
-}
-
-{
-TODO:
-
+    Replace readme in resources with new one
 }
 
 unit Mainfrm;
@@ -41,10 +23,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Forms, ComCtrls, ExtCtrls, Math,
-  Dialogs, Controls, ImgList, Jpeg,
-  PngImageList, AdvGlowButton, WebCopy,
-  JCLFileUtils, JCLRegistry, JCLShell,
-  uVistaFuncs, uGrimUtils, uGrimConst;
+  Dialogs, Controls, Jpeg, UITypes,
+  AdvGlowButton, WebCopy,
+  JCLFileUtils, JCLRegistry, JCLShell, JCLSysInfo,
+  uGrimUtils, uGrimConst;
 
 type
   TfrmMain = class(TForm)
@@ -58,7 +40,6 @@ type
     btnResumeSave: TAdvGlowButton;
     btnDebug: TAdvGlowButton;
     btnPlay: TAdvGlowButton;
-    PngImageList1: TPngImageList;
     procedure FormCreate(Sender: TObject);
     procedure btnPlayClick(Sender: TObject);
     procedure btnWindowedClick(Sender: TObject);
@@ -78,6 +59,7 @@ type
     procedure ChooseImage;
     procedure UpgradeGrim;
     procedure UpdateStatusBar;
+    function GetResourceAsJpeg(const ResName: string): TJPEGImage;
     { Private declarations }
   public
     { Public declarations }
@@ -91,15 +73,13 @@ implementation
 uses Options, Debugfrm;
 
 {$R *.dfm}
-{$R MainResources.res}
-{$R UAC.res}
 
 //Load Jpeg from .res
-function GetResourceAsJpeg(const ResName: string): TJPEGImage;
+function TfrmMain.GetResourceAsJpeg(const ResName: string): TJPEGImage;
 var
   resStream: TResourceStream;
 begin
-  resStream := TResourceStream.Create(hInstance, ResName, 'JPEG');
+  resStream := TResourceStream.Create(HInstance, ResName, RT_RCDATA);
   try
     Result := TJPEGImage.Create;
     Result.LoadFromStream(resStream);
@@ -134,6 +114,7 @@ begin
     StatusBar1.SimpleText:=strStatusRunFromCd + GetCdPath;
 end;
 
+//Upgrade Grim
 procedure TfrmMain.UpgradeGrim;
 var
   DlgResult: TModalResult;
@@ -155,32 +136,24 @@ end;
 //Form Create
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
-  //Set vista fonts if necessary
-  SetDesktopIconFonts(Self.Font);
-
   CreateDefaultRegKeys;
 
   ChooseImage;
 
   if GetGrimPath='' then
-    ShowMessage(strRegKeysNotFound);
+  MessageDlg(strRegKeysNotFound, mtError, [mbOk], 0);
 
-
-  //Getting the temp file name also seems to create it, so rename it to html for the readme
-  strTempReadMeName:=FileGetTempName('GRM');
-  RenameFile(strTempReadMeName, strTempReadMeName + '.html');
-  strTempReadMeName:=strTempReadMeName + '.html';
-
+  strTempReadMeName := FindUnusedFileName( IncludeTrailingPathDelimiter( GetWindowsTempFolder) + 'GRIMLAUNCHERREADME', '.html', '-new');
 
   if GetResumeSave=true then
   begin
-    btnResumeSave.ImageIndex:=1;
     btnResumeSave.Tag:=1;
+    btnResumeSave.Picture.LoadFromResourceName(HInstance, 'ResumeLastSaveTick');
   end
   else
   begin
-    btnResumeSave.ImageIndex:=0;
     btnResumeSave.Tag:=0;
+    btnResumeSave.Picture.LoadFromResourceName(HInstance, 'ResumeLastSaveCross');
   end;
 
   {Check - if run from hard drive, then make sure all files are there -
@@ -273,10 +246,19 @@ end;
 
 //Readme Button Click
 procedure TfrmMain.btnReadmeLecClick(Sender: TObject);
+var
+  FileName: string;
 begin
-  if GetGrimPath='' then
-  else
-    ShellExec(0, 'open', GetGrimPath + strReadmeName, '', '', SW_NORMAL);
+  if GetGrimPath='' then exit;
+
+  FileName := GetGrimPath + strReadmeName;
+  if FileExists(FileName) = false then
+  begin
+    MessageDlg(strErrLecReadmeNotFound, mtError, [mbOk], 0);
+    Exit;
+  end;
+
+  ShellExec(0, 'open', FileName, '', '', SW_NORMAL);
 end;
 
 //Readme Launcher Button Click
@@ -286,10 +268,11 @@ var
 begin
   if strTempReadMeName = '' then exit;
 
-  resStream:=TResourceStream.Create(0, 'README', 'HTML');
+  resStream:=TResourceStream.Create(0, 'README', 'TEXT');
   try
     resStream.SaveToFile(strTempReadMeName);
-    shellexec(0, 'open', strTempReadMeName, '', ExtractFilePath(strTempReadMeName), SW_NORMAL);
+    //Fix for opening webpage in Windows 8. Normally doesnt work from elevated process - this way lets it run as non-elevated
+    shellexec(0, 'open', 'explorer.exe', strTempReadMeName, ExtractFilePath(strTempReadMeName), SW_NORMAL);
   finally
     resStream.Free;
   end;
@@ -300,14 +283,14 @@ procedure TfrmMain.btnResumeSaveClick(Sender: TObject);
 begin
   if btnResumeSave.Tag=1 then
   begin
-    btnResumeSave.ImageIndex:=0;
+    btnResumeSave.Picture.LoadFromResourceName(HInstance, 'ResumeLastSaveCross');
     btnResumeSave.Tag:=0;
     RegWriteInteger(HKEY_CURRENT_USER, 'Software\Quick And Easy\Grim Launcher', 'resumesave', 0);
   end
   else
   if btnResumeSave.Tag=0 then
   begin
-    btnResumeSave.ImageIndex:=1;
+    btnResumeSave.Picture.LoadFromResourceName(HInstance, 'ResumeLastSaveTick');
     btnResumeSave.Tag:=1;
     RegWriteInteger(HKEY_CURRENT_USER, 'Software\Quick And Easy\Grim Launcher', 'resumesave', 1);
   end
@@ -330,20 +313,20 @@ end;
 //Webcopy Connect Error
 procedure TfrmMain.WebCopy1ConnectError(Sender: TObject);
 begin
-  ShowMessage(strErrNoNetConnection);
+  MessageDlg(strErrNoNetConnection, mtError, [mbOk], 0);
 end;
 
 //Webcopy URL Not Found
 procedure TfrmMain.WebCopy1URLNotFound(Sender: TObject; url: String);
 begin
-  ShowMessage(strFileNotFound + url);
+  MessageDlg(strFileNotFound + url, mtError, [mbOk], 0);
 end;
 
 //Webcopy Error Info
 procedure TfrmMain.WebCopy1ErrorInfo(Sender: TObject; ErrorCode: Integer;
   ErrorInfo: String);
 begin
-  ShowMessage(strErrDownload + chr(10) + ErrorInfo);
+  MessageDlg(strErrDownload + chr(10) + ErrorInfo, mtError, [mbOk], 0);
 end;
 
 //Webcopy File Done
