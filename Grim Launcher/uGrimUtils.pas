@@ -22,13 +22,15 @@ function GetAllFilesOnHD: boolean;
 function GetResumeSave: boolean;
 function GetHDRun: boolean;
 function GetCloseOnRun: boolean;
+function GetLauncherSounds: boolean;
 function GetDeveloperMode: boolean;
 function CheckLatestGrimVersion: boolean;
+procedure PlaySoundFromResource(const AResName: string);
 
 implementation
 
 uses
-  windows, sysutils, jclregistry, jclstrings, jclfileutils;
+  windows, sysutils, mmsystem, jclregistry, jclstrings, jclfileutils;
 
 const
   GrimFiles: array [0..20] of string = (
@@ -114,6 +116,14 @@ begin
     result:=false;
 end;
 
+function GetLauncherSounds: boolean;
+begin
+  if RegReadInteger(HKEY_CURRENT_USER,'Software\Quick And Easy\Grim Launcher','launchersounds')=1 then
+    result:=true
+  else
+    result:=false;
+end;
+
 //Create Default Reg Keys
 function CreateDefaultRegKeys : string;
 begin
@@ -138,6 +148,13 @@ begin
 
     Except On EJclRegistryError do
       RegWriteInteger(HKEY_CURRENT_USER, 'Software\Quick And Easy\Grim Launcher', 'resumesave', 0);
+  end;
+
+  try
+    RegReadInteger(HKEY_CURRENT_USER,'Software\Quick And Easy\Grim Launcher','launchersounds')
+
+    Except On EJclRegistryError do
+      RegWriteInteger(HKEY_CURRENT_USER, 'Software\Quick And Easy\Grim Launcher', 'launchersounds', 1);
   end;
 
   //Good_Times key
@@ -187,4 +204,27 @@ begin
   end;
 end;
 
+procedure PlaySoundFromResource(const AResName: string);
+ var
+   HResource: TResourceHandle;
+   HResData: THandle;
+   PWav: Pointer;
+ begin
+  HResource := FindResource(HInstance, PChar(AResName), 'WAV');
+  if HResource <> 0 then begin
+    HResData:=LoadResource(HInstance, HResource);
+    if HResData <> 0 then begin
+      PWav:=LockResource(HResData);
+      if Assigned(PWav) then begin
+        // uses MMSystem
+        sndPlaySound(nil, SND_NODEFAULT); // nil = stop currently playing
+        sndPlaySound(PWav, SND_ASYNC or SND_MEMORY);
+      end;
+//      UnlockResource(HResData); // unnecessary per MSDN
+//      FreeResource(HResData);   // unnecessary per MSDN
+    end;
+  end
+  else
+    RaiseLastOSError;
+end;
 end.

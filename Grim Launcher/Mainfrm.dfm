@@ -8,11 +8,13 @@ object frmMain: TfrmMain
   ClientWidth = 317
   Color = clBtnFace
   ParentFont = True
+  KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
   ScreenSnap = True
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
   object ImageMain: TImage
@@ -21,6 +23,7 @@ object frmMain: TfrmMain
     Width = 317
     Height = 233
     Align = alTop
+    Stretch = True
     ExplicitWidth = 321
   end
   object StatusBar1: TStatusBar
@@ -41,6 +44,7 @@ object frmMain: TfrmMain
     Width = 305
     Height = 27
     Hint = 'Play in fullscreen'
+    FocusType = ftHot
     NotesFont.Charset = DEFAULT_CHARSET
     NotesFont.Color = clWindowText
     NotesFont.Height = -11
@@ -136,6 +140,7 @@ object frmMain: TfrmMain
     ParentShowHint = False
     ShowHint = True
     TabOrder = 1
+    TabStop = True
     OnClick = btnPlayClick
     Appearance.BorderColor = 13421257
     Appearance.BorderColorHot = 10079963
@@ -173,6 +178,7 @@ object frmMain: TfrmMain
     Width = 305
     Height = 27
     Hint = 'Play in a window'
+    FocusType = ftHot
     NotesFont.Charset = DEFAULT_CHARSET
     NotesFont.Color = clWindowText
     NotesFont.Height = -11
@@ -267,6 +273,7 @@ object frmMain: TfrmMain
     ParentShowHint = False
     ShowHint = True
     TabOrder = 2
+    TabStop = True
     OnClick = btnWindowedClick
     Appearance.BorderColor = 13421257
     Appearance.BorderColorHot = 10079963
@@ -304,6 +311,7 @@ object frmMain: TfrmMain
     Width = 305
     Height = 27
     Hint = 'Show the Lucasarts Grim Fandango readme'
+    FocusType = ftHot
     NotesFont.Charset = DEFAULT_CHARSET
     NotesFont.Color = clWindowText
     NotesFont.Height = -11
@@ -425,7 +433,8 @@ object frmMain: TfrmMain
       9E8651D2BBFC0E360000000049454E44AE426082}
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 3
+    TabOrder = 5
+    TabStop = True
     OnClick = btnReadmeLecClick
     Appearance.BorderColor = 13421257
     Appearance.BorderColorHot = 10079963
@@ -463,6 +472,7 @@ object frmMain: TfrmMain
     Width = 305
     Height = 27
     Hint = 'Show the Grim Fandango launcher readme'
+    FocusType = ftHot
     NotesFont.Charset = DEFAULT_CHARSET
     NotesFont.Color = clWindowText
     NotesFont.Height = -11
@@ -583,7 +593,8 @@ object frmMain: TfrmMain
       69234BFDE279CA931AFA37DD2831A211D3A5A90000000049454E44AE426082}
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 4
+    TabOrder = 6
+    TabStop = True
     OnClick = btnReadmeLauncherClick
     Appearance.BorderColor = 13421257
     Appearance.BorderColorHot = 10079963
@@ -621,6 +632,7 @@ object frmMain: TfrmMain
     Width = 305
     Height = 27
     Hint = 'Display the options menu'
+    FocusType = ftHot
     NotesFont.Charset = DEFAULT_CHARSET
     NotesFont.Color = clWindowText
     NotesFont.Height = -11
@@ -685,7 +697,8 @@ object frmMain: TfrmMain
       7F12FF00850F28D747B6B4D40000000049454E44AE426082}
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 5
+    TabOrder = 7
+    TabStop = True
     OnClick = btnOptionsClick
     Appearance.BorderColor = 13421257
     Appearance.BorderColorHot = 10079963
@@ -723,6 +736,7 @@ object frmMain: TfrmMain
     Width = 305
     Height = 27
     ImageIndex = 0
+    FocusType = ftHot
     NotesFont.Charset = DEFAULT_CHARSET
     NotesFont.Color = clWindowText
     NotesFont.Height = -11
@@ -730,7 +744,8 @@ object frmMain: TfrmMain
     NotesFont.Style = []
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 6
+    TabOrder = 3
+    TabStop = True
     OnClick = btnResumeSaveClick
     Appearance.BorderColor = 13421257
     Appearance.BorderColorHot = 10079963
@@ -768,6 +783,7 @@ object frmMain: TfrmMain
     Width = 305
     Height = 27
     Hint = 'Show the Debug Keys window'
+    FocusType = ftHot
     NotesFont.Charset = DEFAULT_CHARSET
     NotesFont.Color = clWindowText
     NotesFont.Height = -11
@@ -824,7 +840,8 @@ object frmMain: TfrmMain
       09092578042B185D76021FDAEC0000000049454E44AE426082}
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 7
+    TabOrder = 4
+    TabStop = True
     OnClick = btnDebugClick
     Appearance.BorderColor = 13421257
     Appearance.BorderColorHot = 10079963
@@ -885,7 +902,7 @@ object frmMain: TfrmMain
         HTTPCommand = hcPost
         Protocol = wpHttp
         TargetFilename = 'gfupd101.exe'
-        URL = 'http://grimfandango.net/files/patch/gfupd101.exe'
+        URL = 'http://demos.residualvm.org/patches/gfupd101.exe'
       end>
     ShowTime = True
     Timeout = 0

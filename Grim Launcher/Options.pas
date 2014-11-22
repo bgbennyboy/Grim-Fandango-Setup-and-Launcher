@@ -26,9 +26,12 @@ type
     JvSHFileOperation1: TJvSHFileOperation;
     btnCloseOnRun: TAdvGlowButton;
     btnHdRun: TAdvGlowButton;
+    btnSoundsInLauncher: TAdvGlowButton;
     procedure FormShow(Sender: TObject);
     procedure btnCloseOnRunClick(Sender: TObject);
     procedure btnHdRunClick(Sender: TObject);
+    procedure btnSoundsInLauncherClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
     procedure CopyFiles;
     { Private declarations }
@@ -45,6 +48,12 @@ implementation
 
 
 //Form Show
+procedure TfrmOptions.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if key = #27 then //Escape key
+    Close;
+end;
+
 procedure TfrmOptions.FormShow(Sender: TObject);
 begin
   if GetCloseOnRun then
@@ -69,6 +78,16 @@ begin
     btnHdRun.Tag:=0;
   end;
 
+  if GetLauncherSounds then
+  begin
+    btnSoundsInLauncher.Picture.LoadFromResourceName(HInstance, 'SoundsInLauncherTick');
+    btnSoundsInLauncher.Tag:=1
+  end
+  else
+  begin
+    btnSoundsInLauncher.Picture.LoadFromResourceName(HInstance, 'SoundsInLauncherCross');
+    btnSoundsInLauncher.Tag:=0;
+  end;
 end;
 
 //Copy Files
@@ -175,6 +194,9 @@ end;
 //CloseOnRun Button Click
 procedure TfrmOptions.btnCloseOnRunClick(Sender: TObject);
 begin
+  if GetLauncherSounds then
+    PlaySoundFromResource('ClickSound');
+
   if btnCloseOnRun.Tag=1 then
   begin
     btnCloseOnRun.Picture.LoadFromResourceName(HInstance, 'CloseOnPlayCross');
@@ -193,6 +215,9 @@ end;
 //HdRun Button Click
 procedure TfrmOptions.btnHdRunClick(Sender: TObject);
 begin
+  if GetLauncherSounds then
+    PlaySoundFromResource('ClickSound');
+
   if btnHdRun.Tag=0 then
   begin
     if GetAllFilesOnHD=false then
@@ -220,6 +245,26 @@ begin
     btnHdRun.Tag:=0;
     RegWriteInteger(HKEY_CURRENT_USER, 'Software\Quick And Easy\Grim Launcher', 'hdrun', 0);
   end;
+end;
+
+procedure TfrmOptions.btnSoundsInLauncherClick(Sender: TObject);
+begin
+  if GetLauncherSounds then
+    PlaySoundFromResource('ClickSound');
+
+  if btnSoundsInLauncher.Tag=1 then
+  begin
+    btnSoundsInLauncher.Picture.LoadFromResourceName(HInstance, 'SoundsInLauncherCross');
+    btnSoundsInLauncher.Tag:=0;
+    RegWriteInteger(HKEY_CURRENT_USER, 'Software\Quick And Easy\Grim Launcher', 'launchersounds', 0);
+  end
+  else
+  if btnSoundsInLauncher.Tag=0 then
+  begin
+    btnSoundsInLauncher.Picture.LoadFromResourceName(HInstance, 'SoundsInLauncherTick');
+    btnSoundsInLauncher.Tag:=1;
+    RegWriteInteger(HKEY_CURRENT_USER, 'Software\Quick And Easy\Grim Launcher', 'launchersounds', 1);
+  end
 end;
 
 end.

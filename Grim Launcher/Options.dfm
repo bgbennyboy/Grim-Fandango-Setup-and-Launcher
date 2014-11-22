@@ -4,7 +4,7 @@ object frmOptions: TfrmOptions
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Options'
-  ClientHeight = 74
+  ClientHeight = 110
   ClientWidth = 298
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -12,8 +12,10 @@ object frmOptions: TfrmOptions
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poOwnerFormCenter
+  OnKeyPress = FormKeyPress
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -26,6 +28,7 @@ object frmOptions: TfrmOptions
       'If enabled then this launcher closes when one of the play button' +
       's is clicked '
     ImageIndex = 0
+    FocusType = ftHot
     NotesFont.Charset = DEFAULT_CHARSET
     NotesFont.Color = clWindowText
     NotesFont.Height = -11
@@ -34,6 +37,7 @@ object frmOptions: TfrmOptions
     ParentShowHint = False
     ShowHint = True
     TabOrder = 0
+    TabStop = True
     OnClick = btnCloseOnRunClick
     Appearance.BorderColor = 13421257
     Appearance.BorderColorHot = 10079963
@@ -72,6 +76,7 @@ object frmOptions: TfrmOptions
     Height = 27
     Hint = 'Switch between running Grim from hard drive and cd'
     ImageIndex = 2
+    FocusType = ftHot
     NotesFont.Charset = DEFAULT_CHARSET
     NotesFont.Color = clWindowText
     NotesFont.Height = -11
@@ -80,7 +85,56 @@ object frmOptions: TfrmOptions
     ParentShowHint = False
     ShowHint = True
     TabOrder = 1
+    TabStop = True
     OnClick = btnHdRunClick
+    Appearance.BorderColor = 13421257
+    Appearance.BorderColorHot = 10079963
+    Appearance.BorderColorDown = 4548219
+    Appearance.BorderColorChecked = 4548219
+    Appearance.Color = 15987697
+    Appearance.ColorTo = 16119283
+    Appearance.ColorChecked = 11918331
+    Appearance.ColorCheckedTo = 7915518
+    Appearance.ColorDisabled = 15921906
+    Appearance.ColorDisabledTo = 15921906
+    Appearance.ColorDown = 7778289
+    Appearance.ColorDownTo = 4296947
+    Appearance.ColorHot = 15465983
+    Appearance.ColorHotTo = 11332863
+    Appearance.ColorMirror = 15657703
+    Appearance.ColorMirrorTo = 16316406
+    Appearance.ColorMirrorHot = 5888767
+    Appearance.ColorMirrorHotTo = 10807807
+    Appearance.ColorMirrorDown = 946929
+    Appearance.ColorMirrorDownTo = 5021693
+    Appearance.ColorMirrorChecked = 10480637
+    Appearance.ColorMirrorCheckedTo = 5682430
+    Appearance.ColorMirrorDisabled = 11974326
+    Appearance.ColorMirrorDisabledTo = 15921906
+    Appearance.GradientHot = ggVertical
+    Appearance.GradientMirrorHot = ggVertical
+    Appearance.GradientDown = ggVertical
+    Appearance.GradientMirrorDown = ggVertical
+    Appearance.GradientChecked = ggVertical
+  end
+  object btnSoundsInLauncher: TAdvGlowButton
+    Left = 9
+    Top = 74
+    Width = 281
+    Height = 27
+    Hint = 'Play sounds in the launcher like the original launcher did'
+    ImageIndex = 2
+    FocusType = ftHot
+    NotesFont.Charset = DEFAULT_CHARSET
+    NotesFont.Color = clWindowText
+    NotesFont.Height = -11
+    NotesFont.Name = 'Tahoma'
+    NotesFont.Style = []
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+    TabStop = True
+    OnClick = btnSoundsInLauncherClick
     Appearance.BorderColor = 13421257
     Appearance.BorderColorHot = 10079963
     Appearance.BorderColorDown = 4548219

@@ -27,7 +27,7 @@ type
     procedure MSWheel1WheelEvent(zdelta, xpos, ypos, ScrollLines: Integer);
     procedure FormCreate(Sender: TObject);
   private
-    { Private declarations }
+    procedure DialogKey(var Msg: TWMKey); message CM_DIALOGKEY;
   public
     { Public declarations }
   end;
@@ -38,6 +38,21 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrmDebug.DialogKey(var Msg: TWMKey);
+begin
+  if not (Msg.CharCode in [VK_DOWN, VK_UP, VK_ESCAPE]) then
+    inherited
+  else
+  if Msg.CharCode =VK_DOWN then
+    ScrollBox1.VertScrollBar.Position:= ScrollBox1.VertScrollBar.Position + ScrollBox1.VertScrollBar.increment
+  else
+  if Msg.CharCode =VK_UP then
+    ScrollBox1.VertScrollBar.Position:= ScrollBox1.VertScrollBar.Position - ScrollBox1.VertScrollBar.increment
+  else
+  if Msg.CharCode =VK_ESCAPE then
+    close;
+end;
 
 procedure TfrmDebug.FormCreate(Sender: TObject);
 var
@@ -50,7 +65,6 @@ begin
   finally
     Png.Free;
   end;
-
 end;
 
 procedure TfrmDebug.MSWheel1WheelEvent(zdelta, xpos, ypos,

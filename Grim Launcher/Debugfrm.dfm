@@ -18,6 +18,7 @@ object frmDebug: TfrmDebug
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
+  Scaled = False
   ScreenSnap = True
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -27,6 +28,7 @@ object frmDebug: TfrmDebug
     Top = 0
     Width = 581
     Height = 538
+    HorzScrollBar.Visible = False
     VertScrollBar.Smooth = True
     VertScrollBar.Tracking = True
     Align = alClient
@@ -46,7 +48,7 @@ object frmDebug: TfrmDebug
     Auto = False
     Version = '1.5.0.0'
     OnWheelEvent = MSWheel1WheelEvent
-    Left = 312
-    Top = 288
+    Left = 280
+    Top = 192
   end
 end

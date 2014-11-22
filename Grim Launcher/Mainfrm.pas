@@ -54,6 +54,7 @@ type
     procedure WebCopy1FileDone(Sender: TObject; idx: Integer);
     procedure btnResumeSaveClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
     strTempReadMeName: string;
     procedure ChooseImage;
@@ -141,7 +142,7 @@ begin
   ChooseImage;
 
   if GetGrimPath='' then
-  MessageDlg(strRegKeysNotFound, mtError, [mbOk], 0);
+    MessageDlg(strRegKeysNotFound, mtError, [mbOk], 0);
 
   strTempReadMeName := FindUnusedFileName( IncludeTrailingPathDelimiter( GetWindowsTempFolder) + 'GRIMLAUNCHERREADME', '.html', '-new');
 
@@ -169,6 +170,9 @@ begin
     if CheckLatestGrimVersion=false then
       UpgradeGrim;
   end;
+
+  if GetLauncherSounds then
+    PlaySoundFromResource('StartSound');
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
@@ -180,6 +184,12 @@ begin
   //Remove the downloaded grim patch if it exists  
   if FileExists(PathGetTempPath + strPatchFileName) then
     DeleteFile(PathGetTempPath + strPatchFileName);
+end;
+
+procedure TfrmMain.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if key = #27 then //Escape key
+    Close;
 end;
 
 //Play Button Click
@@ -251,6 +261,9 @@ var
 begin
   if GetGrimPath='' then exit;
 
+  if GetLauncherSounds then
+    PlaySoundFromResource('ClickSound');
+
   FileName := GetGrimPath + strReadmeName;
   if FileExists(FileName) = false then
   begin
@@ -268,6 +281,9 @@ var
 begin
   if strTempReadMeName = '' then exit;
 
+  if GetLauncherSounds then
+    PlaySoundFromResource('ClickSound');
+
   resStream:=TResourceStream.Create(0, 'README', 'TEXT');
   try
     resStream.SaveToFile(strTempReadMeName);
@@ -281,6 +297,9 @@ end;
 //Resume Last Save Button Click
 procedure TfrmMain.btnResumeSaveClick(Sender: TObject);
 begin
+  if GetLauncherSounds then
+    PlaySoundFromResource('ClickSound');
+
   if btnResumeSave.Tag=1 then
   begin
     btnResumeSave.Picture.LoadFromResourceName(HInstance, 'ResumeLastSaveCross');
@@ -299,6 +318,9 @@ end;
 //Options Button Click
 procedure TfrmMain.btnOptionsClick(Sender: TObject);
 begin
+  if GetLauncherSounds then
+    PlaySoundFromResource('ClickSound');
+
   frmOptions.ShowModal;
 
   UpdateStatusBar;
@@ -307,6 +329,9 @@ end;
 //Debug Keys Button Click
 procedure TfrmMain.btnDebugClick(Sender: TObject);
 begin
+  if GetLauncherSounds then
+    PlaySoundFromResource('ClickSound');
+
   frmDebug.Show;
 end;
 
