@@ -1,8 +1,8 @@
 {
 ******************************************************
   Grim Fandango Launcher
-  2004-2014 By Bennyboy
-  Http://quickandeasysoftware.net
+  2004-2013 By Bennyboy
+  Https://quickandeasysoftware.net
 ******************************************************
 }
 {

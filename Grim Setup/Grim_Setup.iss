@@ -12,16 +12,16 @@
 ;Add other languages
 
 [Setup]
-VersionInfoVersion=1.2
+VersionInfoVersion=1.3
 VersionInfoCompany=Quick And Easy Software
 VersionInfoDescription=Replacement installer for Grim Fandango
-VersionInfoTextVersion=1.2
-VersionInfoCopyright=Bennyboy 2014
-AppCopyright=Bennyboy 2014
+VersionInfoTextVersion=1.3
+VersionInfoCopyright=Bennyboy 2023
+AppCopyright=Bennyboy 2023
 AppName=Grim Fandango
 AppVerName=Grim Fandango
 
-AppVersion=1.0
+AppVersion=1.3
 RestartIfNeededByRun=false
 AllowRootDirectory=false
 DefaultDirName={pf}\Lucasarts\Grim\
@@ -29,11 +29,11 @@ ShowLanguageDialog=auto
 DefaultGroupName=Lucasarts\Grim Fandango\
 OutputBaseFilename=GrimSetup
 AppPublisher=Quick and Easy Software
-AppPublisherURL=http://quickandeasysoftware.net
-AppSupportURL=http://quickandeasysoftware.net
-AppUpdatesURL=http://quickandeasysoftware.net
+AppPublisherURL=https://quickandeasysoftware.net
+AppSupportURL=https://quickandeasysoftware.net
+AppUpdatesURL=https://quickandeasysoftware.net
 AppComments=Contact me via my contact page
-AppContact=http://quickandeasysoftware.net/contact
+AppContact=https://quickandeasysoftware.net/contact
 UninstallDisplayIcon={app}\Grim Fandango Launcher.exe
 UninstallDisplayName=Grim Fandango
 DisableProgramGroupPage=false
@@ -46,9 +46,9 @@ WizardSmallImageFile=Small_Wizard_Image.bmp
 InfoBeforeFile=Before.rtf
 UsePreviousLanguage=no
 VersionInfoProductName=Grim Fandango Setup
-VersionInfoProductVersion=1.2
-VersionInfoProductTextVersion=1.2
-
+VersionInfoProductVersion=1.3
+VersionInfoProductTextVersion=1.3
+SetupIconFile=Grim_Icon.ico
 
 [Dirs]
 Name: {app}\RESOURCE; Flags: uninsalwaysuninstall

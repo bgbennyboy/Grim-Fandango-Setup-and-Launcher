@@ -17,7 +17,7 @@ interface
 
 const
 {************************************Global************************************}
-  strAppVersion:         string = '1.6';
+  strAppVersion:         string = '1.6.1';
   strAppTitle:           string = 'Grim Fandango Launcher';
 
 {**********************************Main Form***********************************}

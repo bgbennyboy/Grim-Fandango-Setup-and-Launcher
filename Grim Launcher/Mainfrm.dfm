@@ -137,6 +137,7 @@ object frmMain: TfrmMain
       BCF8D206AF8BB459777737BDF8E242BA78F13C21138110228410BE490465BCC8
       EFC2682552521CFF993E7DDA56E18DD72206CEC9C9E9EFFE85F004E3BFAA54E7
       492F30FA370000000049454E44AE426082}
+    Rounded = True
     ParentShowHint = False
     ShowHint = True
     TabOrder = 1
@@ -270,6 +271,7 @@ object frmMain: TfrmMain
       30BCF0C21AF8FAEB8B70E5CA154F081142088F12A3325EBCDF45A315484C747C
       F7DC73797B98372EC318D8E9748EF5F842788CF11FA50E7DBA43640527000000
       0049454E44AE426082}
+    Rounded = True
     ParentShowHint = False
     ShowHint = True
     TabOrder = 2
@@ -431,6 +433,7 @@ object frmMain: TfrmMain
       2EB53BECB7AE5BB7EE97CF3CFB4CCFD9B33D9913ACB2B2B26FCFB77079E4A115
       7389FBB482E2BA4B162F6EBC19F391A2EEEE4F9FC1306D70BE079E471E5AF06F
       9E8651D2BBFC0E360000000049454E44AE426082}
+    Rounded = True
     ParentShowHint = False
     ShowHint = True
     TabOrder = 5
@@ -591,6 +594,7 @@ object frmMain: TfrmMain
       4B2D913CE569A9893E0A5D65B3DBEED9BA75EB2F5FDEF7726F5F5F6FE604ABB4
       B4F41B4BCD5C9EF2A4962E36B6574314E35DB16AD5CABB301F29ECEE3EFB3286
       69234BFDE279CA931AFA37DD2831A211D3A5A90000000049454E44AE426082}
+    Rounded = True
     ParentShowHint = False
     ShowHint = True
     TabOrder = 6
@@ -695,6 +699,7 @@ object frmMain: TfrmMain
       A1FEFE58AEBE3E80686884F9E76D18EB7601C243C88BA3C88CB4F4DF8F702FE2
       AC3FE3735C5714FC9BCEB701D1199EDF0D10BA97502F7BA46F19BE5FC2B398C5
       7F12FF00850F28D747B6B4D40000000049454E44AE426082}
+    Rounded = True
     ParentShowHint = False
     ShowHint = True
     TabOrder = 7
@@ -742,6 +747,7 @@ object frmMain: TfrmMain
     NotesFont.Height = -11
     NotesFont.Name = 'Tahoma'
     NotesFont.Style = []
+    Rounded = True
     ParentShowHint = False
     ShowHint = True
     TabOrder = 3
@@ -838,6 +844,7 @@ object frmMain: TfrmMain
       05ECEFCEB11F1B2BD01F38EE813707AA4153547F338D473CAF045A1BFF878748
       9089B53CB81A80C07B966DA535624D30580B824FF89FA015AA34090909090909
       09092578042B185D76021FDAEC0000000049454E44AE426082}
+    Rounded = True
     ParentShowHint = False
     ShowHint = True
     TabOrder = 4
@@ -902,7 +909,7 @@ object frmMain: TfrmMain
         HTTPCommand = hcPost
         Protocol = wpHttp
         TargetFilename = 'gfupd101.exe'
-        URL = 'http://demos.residualvm.org/patches/gfupd101.exe'
+        URL = 'https://quickandeasysoftware.net/files/Grimpatch/gfupd101.exe'
       end>
     ShowTime = True
     Timeout = 0
@@ -910,7 +917,7 @@ object frmMain: TfrmMain
     OnErrorInfo = WebCopy1ErrorInfo
     OnFileDone = WebCopy1FileDone
     OnURLNotFound = WebCopy1URLNotFound
-    Version = '2.4.1.3'
+    Version = '2.5.0.0'
     Left = 272
     Top = 160
   end
