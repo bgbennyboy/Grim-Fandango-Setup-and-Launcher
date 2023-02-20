@@ -1,4 +1,4 @@
-#Grim-Fandango-Setup-and-Launcher
+# Grim-Fandango-Setup-and-Launcher
 There are two parts to this project; an installer and a launcher program. 
 
 Grim Fandango Setup:
